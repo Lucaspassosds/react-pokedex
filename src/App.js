@@ -7,11 +7,9 @@ import PokedexList from './components/PokedexList.component';
 function App() {
   return (
     <Router>
-      <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light bg-dark-gray border-bottom justify-content-center">
             <Link to={'/'} className="navbar-brand">PokeDex</Link>
         </nav>
-      </div>
       <Switch>
         <Route exact path="/" component={PokedexList}/>
       </Switch>

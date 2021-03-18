@@ -1,4 +1,5 @@
-.type_text{
+.type-text {
+    box-shadow: 0.1px 0px 2px #1c1427;
     padding: 0.75vh;
     padding-right: 1.25vh;
     padding-left: 1.25vh;
@@ -9,4 +10,79 @@
 
 .table > tbody > tr > td {
     vertical-align: middle;
+}
+
+.table {
+    margin-bottom: 0 !important;
+}
+
+.poke-container {
+    min-height: 90vh;
+    border: 0.15rem solid gray;
+    border-radius: 5px !important;
+    text-align: center;
+}
+
+.pokedex {
+    padding: 0px;
+}
+
+.pokedex div {
+    background-color: white;
+}
+
+.pokedex button {
+    background-color: white;
+}
+
+.bg-img {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.layer{
+    background-color: rgba(256, 256, 256, 0.5);
+}
+
+.left{
+    position: fixed;
+    top: 50%;
+    left: 2%;
+}
+
+.right{
+    transition: 0.3s;
+    position: fixed;
+    top: 50%;
+    right: 2%;
+}
+
+.left:hover, .right:hover{
+    transform: scale(1.4);
+    cursor: pointer;
+}
+
+[data-tooltip]:before {
+    /* needed - do not touch */
+    content: attr(data-tooltip);
+    position: absolute;
+    opacity: 0;
+    font-size: 0.45em;
+    
+    /* customizable */
+    transition: all 0.15s ease;
+    padding: 0.25rem 0.45rem;
+    color: #ececec;
+    border-radius: 0.6rem;
+    box-shadow: 0.1px 0px 2px #1c1427;    
+}
+
+[data-tooltip]:hover:before {
+    /* needed - do not touch */
+    opacity: 1;
+    
+    /* customizable */
+    background: #40394a;
+    margin-top: -1.35rem; 
 }
