@@ -12,15 +12,27 @@
     vertical-align: middle;
 }
 
+td > a {
+    color: #1687a7;
+    text-decoration: none;
+}
+td > a:hover {
+    color: #e4fbff;
+    text-decoration: none;
+}
+
 .table {
     margin-bottom: 0 !important;
 }
 
 .poke-container {
+    position: relative;
     min-height: 90vh;
     border: 0.15rem solid gray;
     border-radius: 5px !important;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .pokedex {
@@ -39,26 +51,28 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    transition: 0.4s ease-in-out;
 }
 
-.layer{
+.layer {
     background-color: rgba(256, 256, 256, 0.5);
 }
 
-.left{
+.left {
     position: fixed;
     top: 50%;
     left: 2%;
 }
 
-.right{
+.right {
     transition: 0.3s;
     position: fixed;
     top: 50%;
     right: 2%;
 }
 
-.left:hover, .right:hover{
+.left:hover,
+.right:hover {
     transform: scale(1.4);
     cursor: pointer;
 }
@@ -69,20 +83,210 @@
     position: absolute;
     opacity: 0;
     font-size: 0.45em;
-    
+
     /* customizable */
     transition: all 0.15s ease;
     padding: 0.25rem 0.45rem;
     color: #ececec;
     border-radius: 0.6rem;
-    box-shadow: 0.1px 0px 2px #1c1427;    
+    box-shadow: 0.1px 0px 2px #1c1427;
 }
 
 [data-tooltip]:hover:before {
     /* needed - do not touch */
     opacity: 1;
-    
+
     /* customizable */
     background: #40394a;
-    margin-top: -1.35rem; 
+    margin-top: -1.35rem;
+}
+
+.goto {
+    position: absolute;
+    right: 1vh;
+    top: 0.75vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.goto-txt {
+    margin: 0;
+    margin-right: 2.5px;
+}
+
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loader-container * {
+    margin: 1vh;
+}
+
+.snorlax {
+    max-width: 180px;
+    max-height: 180px;
+}
+
+.gen-name {
+    margin: 1.5vh;
+    text-transform: capitalize;
+}
+
+.poke-name {
+    padding: 1.5vh;
+    text-transform: capitalize;
+    background-color: #ececec;
+    border-bottom: 2px solid gray;
+}
+
+.poke-info {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-around;
+}
+
+.photo-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.img-container{
+    position: relative;
+    box-shadow: 0 5px 1.4rem rgba(0, 0, 0, 0.35);
+}
+
+.main-img {
+    width: 45vh;
+    height: 45vh;
+    padding: 1vh;
+    border: 0.15rem solid gray;
+    border-radius: 5px;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+}
+
+
+.front-back {
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    border: 0.15rem solid gray;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+
+.poke-sprite {
+    background-color: #dcdcdc;
+    border-radius: 5px;
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+    background-color: transparent;
+    width: 15vh;
+    height: 10vh;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+    color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+    color: black;
+    transform: rotateY(180deg);
+}
+
+.poke-card {
+    display: flex;
+    justify-content: center;
+}
+
+.poke-row {
+    display: flex;
+    flex: 1;
+    flex-shrink: 0;
+}
+
+hr {
+    margin: 0.75rem;
+    color: lightblue;
+}
+
+@keyframes wavy{
+    0%{
+        transform: translateY(0px);
+    }
+    20%{
+        transform: translateY(-1.2vh);
+    }
+    40%,100%{
+        transform: translateY(0px);
+    }
+}
+
+.wavy span{
+    position: relative;
+    display: inline-block;
+    font-size: 1.2em;
+    margin: 0!important;
+    animation: wavy 1.5s ease-in-out infinite;
+    animation-delay: calc(0.015s * var(--i));
+}
+
+.dex-info{
+    display: flex;
+    flex-direction: column;
+    border: 0.15rem solid gray;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.dex-info * {
+    border: 0.15rem solid gray;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.description-text {
+    background-color: #dcdcdc;
+    font-style: italic;
 }

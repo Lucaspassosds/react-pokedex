@@ -1,5 +1,6 @@
 const globals = {
     api: 'https://pokeapi.co/api/v2/pokemon',
+    characteric_api: 'https://pokeapi.co/api/v2/characteristic',
     colors: {
         water: "#3d7ea6",
         fire: "#cf1b1b",
@@ -18,6 +19,26 @@ const globals = {
         bug: "#81b214",
         electric: "#f0a500",
         steel: "#767c77",
+        fairy: "#f09ae9",
+    },
+    colors_light: {
+        water: "#67B7D1",
+        fire: "#ff7f7f ",
+        grass: "#90ee90",
+        poison: "#726a95",
+        flying: "#86c4ba",
+        rock: "#b5651d ",
+        ground: "#e1c699",
+        ice: "#a3d2ca",
+        dragon: "#394989",
+        dark: "#D3D3D3",
+        ghost: "#b8b5ff",
+        psychic: "#ffb6c1",
+        fighting: "#ffae42",
+        normal: "#99b898",
+        bug: "#95F985",
+        electric: "#ffed83",
+        steel: "#dedede",
         fairy: "#f09ae9",
     },
     types: [

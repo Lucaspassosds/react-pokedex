@@ -6,8 +6,9 @@ import {
     faAngleDoubleRight,
     faAngleDoubleLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import global from "../globals";
 import Dropdown from "react-dropdown";
+import Td from "./TableData.component";
+import global from "../globals";
 import "react-dropdown/style.css";
 import "../css/App.css";
 const { api, colors, types, generationConfig } = global;
@@ -22,6 +23,16 @@ const PokedexList = (props) => {
     const [showFilterOptions, setShowFilterOptions] = useState(false);
     const [loading, setLoading] = useState(true);
     const [currentGen, setCurrentGen] = useState(0);
+
+    const generations = [
+        "Gen 1",
+        "Gen 2",
+        "Gen 3",
+        "Gen 4",
+        "Gen 5",
+        "Gen 6",
+        "Gen 7",
+    ];
 
     //gambiarra
     let bg;
@@ -47,6 +58,9 @@ const PokedexList = (props) => {
         case 6:
             bg = require("../assets/images/gen7.jpg");
             break;
+        default:
+            bg = require("../assets/images/gen1.jpg");
+            break;
     }
 
     useEffect(() => {
@@ -58,24 +72,17 @@ const PokedexList = (props) => {
                 try {
                     const res = await axios.get(route);
                     console.log("STATUS", res.status);
-                    try {
-                        const imgRes = await axios.get(
-                            `${res.data.forms[0].url}`
-                        );
-                        const pokemon = {
-                            id: res.data.id,
-                            name: res.data.name,
-                            type: [
-                                res.data.types[0].type.name,
-                                res.data.types[1]?.type.name,
-                            ],
-                            color: colors[res.data.types[0].type.name],
-                            src: imgRes.data.sprites.front_default,
-                        };
-                        setPokeList((prevList) => [...prevList, pokemon]);
-                    } catch (err) {
-                        console.error("FETCH POKEMON IMG ERROR", err);
-                    }
+                    const pokemon = {
+                        id: res.data.id,
+                        name: res.data.name,
+                        type: [
+                            res.data.types[0].type.name,
+                            res.data.types[1]?.type.name,
+                        ],
+                        color: colors[res.data.types[0].type.name],
+                        src: res.data.sprites.front_default,
+                    };
+                    setPokeList((prevList) => [...prevList, pokemon]);
                 } catch (err) {
                     console.error("FETCH POKEMON ERROR", err);
                 }
@@ -132,11 +139,11 @@ const PokedexList = (props) => {
                         },
                     }}
                 >
-                    <td>{value.id}</td>
-                    <td>{name}</td>
-                    <td>
+                    <Td to={`/pokemon/${value.id}`}>{value.id}</Td>
+                    <Td to={`/pokemon/${value.id}`}>{name}</Td>
+                    <Td to={`/pokemon/${value.id}`}>
                         <img src={value.src} alt={name}></img>
-                    </td>
+                    </Td>
                     <td>
                         <span
                             className='type-text'
@@ -193,16 +200,23 @@ const PokedexList = (props) => {
             }));
         }
     };
+    const selectGenerationChange = (e) => {
+        setCurrentGen(generations.indexOf(e.value));
+        setPokeList([]);
+    };
 
     return (
         <div className='bg-img' style={{ backgroundImage: `url(${bg})` }}>
             <div className='p-3 layer'>
-                <div className='left' data-tooltip={`Generation ${currentGen}`}>
+                <div
+                    className='left'
+                    style={{
+                        visibility: currentGen !== 0 ? "visible" : "hidden",
+                    }}
+                    data-tooltip={`Generation ${currentGen}`}
+                >
                     <FontAwesomeIcon
                         size='4x'
-                        style={{
-                            visibility: currentGen !== 0 ? "visible" : "hidden",
-                        }}
                         icon={faAngleDoubleLeft}
                         onClick={() => {
                             if (currentGen > 0 && !loading) {
@@ -213,12 +227,15 @@ const PokedexList = (props) => {
                         data-tooltip='teste'
                     />
                 </div>
-                <div className='right' data-tooltip={`Generation ${currentGen+2}`}>
+                <div
+                    className='right'
+                    style={{
+                        visibility: currentGen !== 6 ? "visible" : "hidden",
+                    }}
+                    data-tooltip={`Generation ${currentGen + 2}`}
+                >
                     <FontAwesomeIcon
                         size='4x'
-                        style={{
-                            visibility: currentGen !== 6 ? "visible" : "hidden",
-                        }}
                         icon={faAngleDoubleRight}
                         onClick={() => {
                             if (currentGen < 6 && !loading) {
@@ -231,11 +248,8 @@ const PokedexList = (props) => {
                 </div>
                 <div className='container pokedex'>
                     {showFilterOptions ? (
-                        <>
-                            <form
-                                className='p-2'
-                                style={{ backgroundColor: "white" }}
-                            >
+                        <div className='p-2 mb-2 rounded'>
+                            <form style={{ backgroundColor: "white" }}>
                                 <div className='form-group'>
                                     <label>Name: </label>
                                     <input
@@ -267,7 +281,7 @@ const PokedexList = (props) => {
                             >
                                 CLOSE FILTER
                             </button>
-                        </>
+                        </div>
                     ) : !loading ? (
                         <button
                             className='btn btn-outline-primary col-md-12 mb-2'
@@ -280,21 +294,85 @@ const PokedexList = (props) => {
                     )}
                     <div className='poke-container mb-5'>
                         {loading ? (
-                            <h3>Loading...</h3>
-                        ) : (
-                            <div className='table-responsive'>
-                                <table className='table'>
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Image</th>
-                                            <th>Type(s)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>{loadPokeList()}</tbody>
-                                </table>
+                            <div className='loader-container'>
+                                <img
+                                    className='snorlax'
+                                    src={require("../assets/images/snorlax.gif")}
+                                    alt='Zzzzzz'
+                                />
+                                <div className='wavy'>
+                                    <span style={{ "--i": 1 }}> L </span>
+                                    <span style={{ "--i": 2 }}> o </span>
+                                    <span style={{ "--i": 3 }}> a </span>
+                                    <span style={{ "--i": 4 }}> d </span>
+                                    <span style={{ "--i": 5 }}> i </span>
+                                    <span style={{ "--i": 6 }}> n </span>
+                                    <span style={{ "--i": 7 }}> g </span>
+                                    <span style={{ "--i": 8 }}> . </span>
+                                    <span style={{ "--i": 9 }}> . </span>
+                                    <span style={{ "--i": 10 }}> . </span>
+                                    <span style={{ "--i": 11 }}>&nbsp;</span>
+                                    <span style={{ "--i": 12 }}> T </span>
+                                    <span style={{ "--i": 13 }}> h </span>
+                                    <span style={{ "--i": 14 }}> i </span>
+                                    <span style={{ "--i": 15 }}> s </span>
+                                    <span style={{ "--i": 16 }}>&nbsp;</span>
+                                    <span style={{ "--i": 17 }}> m </span>
+                                    <span style={{ "--i": 18 }}> i </span>
+                                    <span style={{ "--i": 19 }}> g </span>
+                                    <span style={{ "--i": 20 }}> h </span>
+                                    <span style={{ "--i": 21 }}> t </span>
+                                    <span style={{ "--i": 22 }}>&nbsp;</span>
+                                    <span style={{ "--i": 23 }}> t </span>
+                                    <span style={{ "--i": 24 }}> a </span>
+                                    <span style={{ "--i": 25 }}> k </span>
+                                    <span style={{ "--i": 26 }}> e </span>
+                                    <span style={{ "--i": 27 }}>&nbsp;</span>
+                                    <span style={{ "--i": 28 }}> a </span>
+                                    <span style={{ "--i": 29 }}>&nbsp;</span>
+                                    <span style={{ "--i": 30 }}> w </span>
+                                    <span style={{ "--i": 31 }}> h </span>
+                                    <span style={{ "--i": 32 }}> i </span>
+                                    <span style={{ "--i": 33 }}> l </span>
+                                    <span style={{ "--i": 34 }}> e </span>
+                                    <span style={{ "--i": 35 }}> . </span>
+                                    <span style={{ "--i": 36 }}> . </span>
+                                    <span style={{ "--i": 37 }}> . </span>
+                                </div>
                             </div>
+                        ) : (
+                            <>
+                                <h3 className='gen-name'>
+                                    Generation {currentGen + 1}
+                                </h3>
+                                <div className='goto'>
+                                    <p className='goto-txt'>Go to Gen</p>
+                                    <Dropdown
+                                        options={generations.filter(
+                                            (gen) =>
+                                                generations.indexOf(gen) !==
+                                                currentGen
+                                        )}
+                                        onChange={selectGenerationChange}
+                                        placeholder={
+                                            "Generation " + (currentGen + 1)
+                                        }
+                                    />
+                                </div>
+                                <div className='table-responsive'>
+                                    <table className='table'>
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Image</th>
+                                                <th>Type(s)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>{loadPokeList()}</tbody>
+                                    </table>
+                                </div>
+                            </>
                         )}
                     </div>
                 </div>
