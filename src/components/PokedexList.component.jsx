@@ -206,178 +206,179 @@ const PokedexList = (props) => {
     };
 
     return (
-        <div className='bg-img' style={{ backgroundImage: `url(${bg})` }}>
-            <div className='p-3 layer'>
-                <div
-                    className='left'
-                    style={{
-                        visibility: currentGen !== 0 ? "visible" : "hidden",
+        <>
+            <div className='bg-img' style={{ backgroundImage: `url(${bg})` }}>
+                <div className='p-3 layer' />
+            </div>
+            <div
+                className='left'
+                style={{
+                    visibility: currentGen !== 0 ? "visible" : "hidden",
+                }}
+                data-tooltip={`Generation ${currentGen}`}
+            >
+                <FontAwesomeIcon
+                    size='4x'
+                    icon={faAngleDoubleLeft}
+                    onClick={() => {
+                        if (currentGen > 0 && !loading) {
+                            setCurrentGen(currentGen - 1);
+                            setPokeList([]);
+                        }
                     }}
-                    data-tooltip={`Generation ${currentGen}`}
-                >
-                    <FontAwesomeIcon
-                        size='4x'
-                        icon={faAngleDoubleLeft}
-                        onClick={() => {
-                            if (currentGen > 0 && !loading) {
-                                setCurrentGen(currentGen - 1);
-                                setPokeList([]);
-                            }
-                        }}
-                        data-tooltip='teste'
-                    />
-                </div>
-                <div
-                    className='right'
-                    style={{
-                        visibility: currentGen !== 6 ? "visible" : "hidden",
+                    data-tooltip='teste'
+                />
+            </div>
+            <div
+                className='right'
+                style={{
+                    visibility: currentGen !== 6 ? "visible" : "hidden",
+                }}
+                data-tooltip={`Generation ${currentGen + 2}`}
+            >
+                <FontAwesomeIcon
+                    size='4x'
+                    icon={faAngleDoubleRight}
+                    onClick={() => {
+                        if (currentGen < 6 && !loading) {
+                            setCurrentGen(currentGen + 1);
+                            setPokeList([]);
+                        }
                     }}
-                    data-tooltip={`Generation ${currentGen + 2}`}
-                >
-                    <FontAwesomeIcon
-                        size='4x'
-                        icon={faAngleDoubleRight}
-                        onClick={() => {
-                            if (currentGen < 6 && !loading) {
-                                setCurrentGen(currentGen + 1);
-                                setPokeList([]);
-                            }
-                        }}
-                        data-tooltip='teste'
-                    />
-                </div>
-                <div className='container pokedex'>
-                    {showFilterOptions ? (
-                        <div className='p-2 mb-2 rounded'>
-                            <form style={{ backgroundColor: "white" }}>
-                                <div className='form-group'>
-                                    <label>Name: </label>
-                                    <input
-                                        type='text'
-                                        className='form-control'
-                                        onChange={filterNameChange}
-                                    />
-                                </div>
-                                <div className='form-group'>
-                                    <label>Primary type:</label>
-                                    <Dropdown
-                                        options={types}
-                                        onChange={filterPrimaryChange}
-                                        placeholder='Select an option'
-                                    />
-                                </div>
-                                <div className='form-group'>
-                                    <label>Secondary type:</label>
-                                    <Dropdown
-                                        options={types}
-                                        onChange={filterSecondaryChange}
-                                        placeholder='Select an option'
-                                    />
-                                </div>
-                            </form>
-                            <button
-                                className='btn btn-danger col-md-12 mb-2'
-                                onClick={() => setShowFilterOptions(false)}
-                            >
-                                CLOSE FILTER
-                            </button>
-                        </div>
-                    ) : !loading ? (
-                        <button
-                            className='btn btn-outline-primary col-md-12 mb-2'
-                            onClick={() => setShowFilterOptions(true)}
-                        >
-                            FILTER
-                        </button>
-                    ) : (
-                        <></>
-                    )}
-                    <div className='poke-container mb-5'>
-                        {loading ? (
-                            <div className='loader-container'>
-                                <img
-                                    className='snorlax'
-                                    src={require("../assets/images/snorlax.gif")}
-                                    alt='Zzzzzz'
+                    data-tooltip='teste'
+                />
+            </div>
+            <div className='container pokedex'>
+                {showFilterOptions ? (
+                    <div className='p-2 mb-2 rounded'>
+                        <form style={{ backgroundColor: "white" }}>
+                            <div className='form-group'>
+                                <label>Name: </label>
+                                <input
+                                    type='text'
+                                    className='form-control'
+                                    onChange={filterNameChange}
                                 />
-                                <div className='wavy'>
-                                    <span style={{ "--i": 1 }}> L </span>
-                                    <span style={{ "--i": 2 }}> o </span>
-                                    <span style={{ "--i": 3 }}> a </span>
-                                    <span style={{ "--i": 4 }}> d </span>
-                                    <span style={{ "--i": 5 }}> i </span>
-                                    <span style={{ "--i": 6 }}> n </span>
-                                    <span style={{ "--i": 7 }}> g </span>
-                                    <span style={{ "--i": 8 }}> . </span>
-                                    <span style={{ "--i": 9 }}> . </span>
-                                    <span style={{ "--i": 10 }}> . </span>
-                                    <span style={{ "--i": 11 }}>&nbsp;</span>
-                                    <span style={{ "--i": 12 }}> T </span>
-                                    <span style={{ "--i": 13 }}> h </span>
-                                    <span style={{ "--i": 14 }}> i </span>
-                                    <span style={{ "--i": 15 }}> s </span>
-                                    <span style={{ "--i": 16 }}>&nbsp;</span>
-                                    <span style={{ "--i": 17 }}> m </span>
-                                    <span style={{ "--i": 18 }}> i </span>
-                                    <span style={{ "--i": 19 }}> g </span>
-                                    <span style={{ "--i": 20 }}> h </span>
-                                    <span style={{ "--i": 21 }}> t </span>
-                                    <span style={{ "--i": 22 }}>&nbsp;</span>
-                                    <span style={{ "--i": 23 }}> t </span>
-                                    <span style={{ "--i": 24 }}> a </span>
-                                    <span style={{ "--i": 25 }}> k </span>
-                                    <span style={{ "--i": 26 }}> e </span>
-                                    <span style={{ "--i": 27 }}>&nbsp;</span>
-                                    <span style={{ "--i": 28 }}> a </span>
-                                    <span style={{ "--i": 29 }}>&nbsp;</span>
-                                    <span style={{ "--i": 30 }}> w </span>
-                                    <span style={{ "--i": 31 }}> h </span>
-                                    <span style={{ "--i": 32 }}> i </span>
-                                    <span style={{ "--i": 33 }}> l </span>
-                                    <span style={{ "--i": 34 }}> e </span>
-                                    <span style={{ "--i": 35 }}> . </span>
-                                    <span style={{ "--i": 36 }}> . </span>
-                                    <span style={{ "--i": 37 }}> . </span>
-                                </div>
                             </div>
-                        ) : (
-                            <>
-                                <h3 className='gen-name'>
-                                    Generation {currentGen + 1}
-                                </h3>
-                                <div className='goto'>
-                                    <p className='goto-txt'>Go to Gen</p>
-                                    <Dropdown
-                                        options={generations.filter(
-                                            (gen) =>
-                                                generations.indexOf(gen) !==
-                                                currentGen
-                                        )}
-                                        onChange={selectGenerationChange}
-                                        placeholder={
-                                            "Generation " + (currentGen + 1)
-                                        }
-                                    />
-                                </div>
-                                <div className='table-responsive'>
-                                    <table className='table'>
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Image</th>
-                                                <th>Type(s)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>{loadPokeList()}</tbody>
-                                    </table>
-                                </div>
-                            </>
-                        )}
+                            <div className='form-group'>
+                                <label>Primary type:</label>
+                                <Dropdown
+                                    options={types}
+                                    onChange={filterPrimaryChange}
+                                    placeholder='Select an option'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label>Secondary type:</label>
+                                <Dropdown
+                                    options={types}
+                                    onChange={filterSecondaryChange}
+                                    placeholder='Select an option'
+                                />
+                            </div>
+                        </form>
+                        <button
+                            className='btn btn-danger col-md-12 mb-2'
+                            onClick={() => setShowFilterOptions(false)}
+                        >
+                            CLOSE FILTER
+                        </button>
                     </div>
+                ) : !loading ? (
+                    <button
+                        className='btn btn-outline-primary col-md-12 mb-2'
+                        onClick={() => setShowFilterOptions(true)}
+                    >
+                        FILTER
+                    </button>
+                ) : (
+                    <></>
+                )}
+                <div className='poke-container mb-5'>
+                    {loading ? (
+                        <div className='loader-container'>
+                            <img
+                                className='snorlax'
+                                src={require("../assets/images/snorlax.gif")}
+                                alt='Zzzzzz'
+                            />
+                            <div className='wavy'>
+                                <span style={{ "--i": 1 }}> L </span>
+                                <span style={{ "--i": 2 }}> o </span>
+                                <span style={{ "--i": 3 }}> a </span>
+                                <span style={{ "--i": 4 }}> d </span>
+                                <span style={{ "--i": 5 }}> i </span>
+                                <span style={{ "--i": 6 }}> n </span>
+                                <span style={{ "--i": 7 }}> g </span>
+                                <span style={{ "--i": 8 }}> . </span>
+                                <span style={{ "--i": 9 }}> . </span>
+                                <span style={{ "--i": 10 }}> . </span>
+                                <span style={{ "--i": 11 }}>&nbsp;</span>
+                                <span style={{ "--i": 12 }}> T </span>
+                                <span style={{ "--i": 13 }}> h </span>
+                                <span style={{ "--i": 14 }}> i </span>
+                                <span style={{ "--i": 15 }}> s </span>
+                                <span style={{ "--i": 16 }}>&nbsp;</span>
+                                <span style={{ "--i": 17 }}> m </span>
+                                <span style={{ "--i": 18 }}> i </span>
+                                <span style={{ "--i": 19 }}> g </span>
+                                <span style={{ "--i": 20 }}> h </span>
+                                <span style={{ "--i": 21 }}> t </span>
+                                <span style={{ "--i": 22 }}>&nbsp;</span>
+                                <span style={{ "--i": 23 }}> t </span>
+                                <span style={{ "--i": 24 }}> a </span>
+                                <span style={{ "--i": 25 }}> k </span>
+                                <span style={{ "--i": 26 }}> e </span>
+                                <span style={{ "--i": 27 }}>&nbsp;</span>
+                                <span style={{ "--i": 28 }}> a </span>
+                                <span style={{ "--i": 29 }}>&nbsp;</span>
+                                <span style={{ "--i": 30 }}> w </span>
+                                <span style={{ "--i": 31 }}> h </span>
+                                <span style={{ "--i": 32 }}> i </span>
+                                <span style={{ "--i": 33 }}> l </span>
+                                <span style={{ "--i": 34 }}> e </span>
+                                <span style={{ "--i": 35 }}> . </span>
+                                <span style={{ "--i": 36 }}> . </span>
+                                <span style={{ "--i": 37 }}> . </span>
+                            </div>
+                        </div>
+                    ) : (
+                        <>
+                            <h3 className='gen-name bg-light'>
+                                Generation {currentGen + 1}
+                            </h3>
+                            <div className='goto'>
+                                <p className='goto-txt'>Go to Gen</p>
+                                <Dropdown
+                                    options={generations.filter(
+                                        (gen) =>
+                                            generations.indexOf(gen) !==
+                                            currentGen
+                                    )}
+                                    onChange={selectGenerationChange}
+                                    placeholder={
+                                        "Generation " + (currentGen + 1)
+                                    }
+                                />
+                            </div>
+                            <div className='table-responsive'>
+                                <table className='table'>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Image</th>
+                                            <th>Type(s)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>{loadPokeList()}</tbody>
+                                </table>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

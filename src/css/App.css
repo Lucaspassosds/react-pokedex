@@ -1,3 +1,12 @@
+@font-face {
+    font-family: Pokemon Hollow;
+    src: url("../assets/fonts/Pokemon\ Hollow.ttf");
+}
+@font-face {
+    font-family: Pokemon Solid;
+    src: url("../assets/fonts/Pokemon\ Solid.ttf");
+}
+
 .type-text {
     box-shadow: 0.1px 0px 2px #1c1427;
     padding: 0.75vh;
@@ -36,6 +45,7 @@ td > a:hover {
 }
 
 .pokedex {
+    margin-top: 12.5vh;
     padding: 0px;
 }
 
@@ -52,22 +62,31 @@ td > a:hover {
     background-attachment: fixed;
     background-size: cover;
     transition: 0.4s ease-in-out;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: -1;
 }
 
 .layer {
     background-color: rgba(256, 256, 256, 0.5);
+    height: 100%;
+    width: 100%;
+}
+
+.right,
+.left {
+    transition: 0.3s;
+    position: fixed;
+    top: 50%;
+    z-index: 999;
 }
 
 .left {
-    position: fixed;
-    top: 50%;
     left: 2%;
 }
 
 .right {
-    transition: 0.3s;
-    position: fixed;
-    top: 50%;
     right: 2%;
 }
 
@@ -134,11 +153,13 @@ td > a:hover {
 }
 
 .gen-name {
+    font-family: 'Pokemon Solid';
     margin: 1.5vh;
     text-transform: capitalize;
 }
 
 .poke-name {
+    font-family: 'Pokemon Solid';
     padding: 1.5vh;
     text-transform: capitalize;
     background-color: #ececec;
@@ -159,21 +180,22 @@ td > a:hover {
     justify-content: space-evenly;
 }
 
-.img-container{
+.img-container {
     position: relative;
-    box-shadow: 0 5px 1.4rem rgba(0, 0, 0, 0.35);
+    background-color: transparent !important;
 }
 
 .main-img {
-    width: 45vh;
-    height: 45vh;
+    width: 36vh;
+    height: 36vh;
     padding: 1vh;
     border: 0.15rem solid gray;
     border-radius: 5px;
     transform-style: preserve-3d;
     transition: 0.5s;
+    box-shadow: 0 5px 1.4rem rgba(0, 0, 0, 0.35);
+    background-color: white;
 }
-
 
 .front-back {
     display: flex;
@@ -236,41 +258,50 @@ td > a:hover {
 .poke-card {
     display: flex;
     justify-content: center;
+    text-transform: capitalize;
 }
 
 .poke-row {
     display: flex;
     flex: 1;
     flex-shrink: 0;
+    border: 0 !important;
+}
+.poke-row * {
+    border: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 hr {
     margin: 0.75rem;
     color: lightblue;
+    border: 0 !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
-@keyframes wavy{
-    0%{
+@keyframes wavy {
+    0% {
         transform: translateY(0px);
     }
-    20%{
+    20% {
         transform: translateY(-1.2vh);
     }
-    40%,100%{
+    40%,
+    100% {
         transform: translateY(0px);
     }
 }
 
-.wavy span{
+.wavy span {
     position: relative;
     display: inline-block;
     font-size: 1.2em;
-    margin: 0!important;
+    margin: 0 !important;
     animation: wavy 1.5s ease-in-out infinite;
     animation-delay: calc(0.015s * var(--i));
 }
 
-.dex-info{
+.dex-info {
     display: flex;
     flex-direction: column;
     border: 0.15rem solid gray;
@@ -286,7 +317,60 @@ hr {
     margin-bottom: 0.5rem;
 }
 
+.dex-info img {
+    background-color: white;
+    align-self: center;
+    max-width: 36vh;
+    max-height: 36vh;
+}
+
 .description-text {
     background-color: #dcdcdc;
     font-style: italic;
+}
+
+.types-container * {
+    border: 0;
+}
+
+.types-container div {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.main-text {
+    font-family: "Pokemon Solid", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+    font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .poke-info {
+        flex-direction: column;
+    }
+    .poke-info * {
+        margin-bottom: 1rem;
+    }
+    .front-back {
+        padding-bottom: 1rem;
+    }
+    .bg-img {
+        background-attachment: initial;
+        position: fixed;
+        z-index: -1;
+    }
+    .goto {
+        position: unset;
+        margin-bottom: 1rem;
+    }
+    .left {
+        left: 5.5%;
+    }
+    
+    .right {
+        right: 5.5%;
+    }
 }
