@@ -7,6 +7,10 @@
     src: url("../assets/fonts/Pokemon\ Solid.ttf");
 }
 
+a {
+    text-decoration: none !important;
+}
+
 .type-text {
     box-shadow: 0.1px 0px 2px #1c1427;
     padding: 0.75vh;
@@ -345,6 +349,10 @@ hr {
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
     font-size: 1.5rem;
+}
+
+.footer p{
+    margin-bottom: 0 !important;
 }
 
 @media only screen and (max-width: 768px) {

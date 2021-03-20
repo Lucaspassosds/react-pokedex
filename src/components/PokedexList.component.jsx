@@ -63,8 +63,6 @@ const PokedexList = (props) => {
             break;
     }
 
-    console.log(bg);
-
     useEffect(() => {
         async function getPokemons() {
             setLoading(true);
@@ -209,7 +207,7 @@ const PokedexList = (props) => {
 
     return (
         <>
-            <div className='bg-img' style={{ backgroundImage: `url(${bg.default})` }}>
+            <div className='bg-img' style={{ backgroundImage: `url(${bg?.default})` }}>
                 <div className='p-3 layer' />
             </div>
             <div

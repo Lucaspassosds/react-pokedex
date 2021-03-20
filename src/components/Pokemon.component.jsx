@@ -145,7 +145,7 @@ const Pokemon = (props) => {
 
     return (
         <>
-            <div className='bg-img' style={{ backgroundImage: `url(${bg.default})` }}>
+            <div className='bg-img' style={{ backgroundImage: `url(${bg?.default})` }}>
                 <div className='layer p-3' />
             </div>
 
