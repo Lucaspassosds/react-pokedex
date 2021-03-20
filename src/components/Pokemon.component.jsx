@@ -5,7 +5,6 @@ import {
     faAngleDoubleRight,
     faAngleDoubleLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import VanillaTilt from "vanilla-tilt";
 import "../css/App.css";
 import global from "../globals";
@@ -146,7 +145,7 @@ const Pokemon = (props) => {
 
     return (
         <>
-            <div className='bg-img' style={{ backgroundImage: `url(${bg})` }}>
+            <div className='bg-img' style={{ backgroundImage: `url(${bg.default})` }}>
                 <div className='layer p-3' />
             </div>
 
@@ -201,7 +200,7 @@ const Pokemon = (props) => {
                         <div className='loader-container'>
                             <img
                                 className='snorlax'
-                                src={require("../assets/images/snorlax.gif")}
+                                src={require("../assets/images/snorlax.gif").default}
                                 alt='Zzzzzz'
                             />
                             <div className='wavy'>

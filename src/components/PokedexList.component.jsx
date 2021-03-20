@@ -63,6 +63,8 @@ const PokedexList = (props) => {
             break;
     }
 
+    console.log(bg);
+
     useEffect(() => {
         async function getPokemons() {
             setLoading(true);
@@ -207,7 +209,7 @@ const PokedexList = (props) => {
 
     return (
         <>
-            <div className='bg-img' style={{ backgroundImage: `url(${bg})` }}>
+            <div className='bg-img' style={{ backgroundImage: `url(${bg.default})` }}>
                 <div className='p-3 layer' />
             </div>
             <div
@@ -299,7 +301,7 @@ const PokedexList = (props) => {
                         <div className='loader-container'>
                             <img
                                 className='snorlax'
-                                src={require("../assets/images/snorlax.gif")}
+                                src={require("../assets/images/snorlax.gif").default}
                                 alt='Zzzzzz'
                             />
                             <div className='wavy'>

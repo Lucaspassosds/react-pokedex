@@ -154,8 +154,9 @@ td > a:hover {
 
 .gen-name {
     font-family: 'Pokemon Solid';
-    margin: 1.5vh;
+    padding: 1.5vh;
     text-transform: capitalize;
+    margin-bottom: 0;
 }
 
 .poke-name {
@@ -364,7 +365,7 @@ hr {
     }
     .goto {
         position: unset;
-        margin-bottom: 1rem;
+        margin: 1rem 0;
     }
     .left {
         left: 5.5%;
